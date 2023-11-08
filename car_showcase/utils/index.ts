@@ -1,3 +1,5 @@
+import { CarProps } from "@/types";
+
 export async function fetchCars() {
   const headers = {
     "X-RapidAPI-Key": "2419409df5msh0f0c0335c6a58a7p1ea6f7jsn3253821fcdab",
@@ -5,7 +7,7 @@ export async function fetchCars() {
   };
 
   const response = fetch(
-    "https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=corolla",
+    "https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=carrera",
     {
       headers: headers,
     }
