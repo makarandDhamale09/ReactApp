@@ -20,6 +20,20 @@ h1 {
   border: 4px solid black;
   width: 825px;
   margin: 50px auto;
+  position: relative;
+}
+
+.sale {
+  position: absolute;
+  background-color: #ec2f2f;
+  color: #f7f7f7;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  letter-spacing: 2px;
+  top: -15px;
+  left: -30px;
 }
 
 .amount {
@@ -80,4 +94,35 @@ button {
 button:hover {
   color: black;
   background-color: white;
+}
+
+.color-box {
+  padding: 10px;
+  display: inline-block;
+  margin-bottom: 15px;
+  margin-right: 12px;
+}
+
+.color-black {
+  background-color: #000;
+}
+
+.color-blue {
+  background-color: #0675f5;
+}
+
+.color-red {
+  background-color: #fb2803;
+}
+
+.color-yellow {
+  background-color: #f8bb04;
+}
+
+.color-green {
+  background-color: #99f604;
+}
+
+.color-brown {
+  background-color: #995512;
 }
