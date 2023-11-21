@@ -2,6 +2,7 @@
   /* border-top: 10px solid #1098ad; */
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 /* PAGE SECTIONS */
@@ -273,7 +274,6 @@ nav p {
 }
 
 .author {
-  /* padding-left: 10px; */
   float: left;
   margin-top: 10px;
   margin-left: 20px;

@@ -2,6 +2,7 @@
   font-family: sans-serif;
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -37,22 +38,35 @@ h1 {
 }
 
 .amount {
+  float: left;
   font-size: 24px;
 }
 
 .shipping {
+  float: right;
   text-transform: uppercase;
   font-weight: bold;
   color: #777;
   margin-bottom: 20px;
-}
-
-.description {
-  margin-bottom: 10px;
+  margin-top: 8px;
 }
 
 .information {
   margin-bottom: 20px;
+}
+
+.product-description {
+  margin-bottom: 10px;
+  clear: both;
+}
+
+/* Product Info */
+.product-info {
+  /* (825- 8 - 250 - 40) */
+  width: 243px;
+  float: left;
+  margin-right: 40px;
+  margin-top: 20px;
 }
 
 a:link,
@@ -126,3 +140,24 @@ button:hover {
 .color-brown {
   background-color: #995512;
 }
+
+.product-details {
+  width: 243px;
+  float: left;
+  margin-top: 20px;
+}
+
+.product-img {
+  float: left;
+  margin-right: 40px;
+}
+
+/* .shoe-img {
+  float: left;
+}
+
+.description {
+  float: right;
+  width: 240px;
+  padding: 20px;
+} */
