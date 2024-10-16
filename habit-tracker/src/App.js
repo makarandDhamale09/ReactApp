@@ -1,21 +1,21 @@
 // src/App.js
 import React, { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import HabitList from "./components/HabitList";
-import AddHabit from "./components/AddHabit";
-import { Container, Typography } from "@mui/material";
+import AddHabitPage from "./pages/AddHabitPage";
+import { Container, Typography, Fab } from "@mui/material";
 import {
   FitnessCenter,
   DirectionsRun,
   DirectionsWalk,
   AccessibilityNew,
+  Add,
 } from "@mui/icons-material";
-
-const iconMap = {
-  FitnessCenter: <FitnessCenter />,
-  DirectionsRun: <DirectionsRun />,
-  DirectionsWalk: <DirectionsWalk />,
-  AccessibilityNew: <AccessibilityNew />,
-};
 
 const App = () => {
   const [habits, setHabits] = useState([]);
@@ -28,8 +28,8 @@ const App = () => {
       icon,
       count,
       unit,
-      progress: 0, // Track the progress percentage
-      color, // Store the color
+      progress: 0,
+      color,
     };
     setHabits([...habits, newHabit]);
   };
@@ -49,18 +49,46 @@ const App = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Typography variant="h3" align="center" gutterBottom>
-        Habit Tracker
-      </Typography>
-      <AddHabit onAddHabit={addHabit} />
-      <HabitList
-        habits={habits}
-        onUpdateProgress={updateProgress}
-        onDelete={deleteHabit}
-        iconMap={iconMap}
-      />
-    </Container>
+    <Router>
+      <Container maxWidth="sm">
+        <Typography variant="h3" align="center" gutterBottom>
+          Habit Tracker
+        </Typography>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <HabitList
+                habits={habits}
+                onUpdateProgress={updateProgress}
+                onDelete={deleteHabit}
+              />
+            }
+          />
+          <Route path="/add" element={<AddHabitPage onAddHabit={addHabit} />} />
+        </Routes>
+        <NavigateButton />
+      </Container>
+    </Router>
+  );
+};
+
+const NavigateButton = () => {
+  const navigate = useNavigate();
+
+  return (
+    <Fab
+      color="primary"
+      aria-label="add"
+      style={{
+        position: "fixed",
+        bottom: "20px",
+        right: "20px",
+      }}
+      onClick={() => navigate("/add")}
+    >
+      <Add />
+    </Fab>
   );
 };
 

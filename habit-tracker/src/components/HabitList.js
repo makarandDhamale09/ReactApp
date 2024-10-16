@@ -2,7 +2,7 @@
 import React from "react";
 import HabitItem from "./HabitItem";
 
-const HabitList = ({ habits, onUpdateProgress, onDelete, iconMap }) => {
+const HabitList = ({ habits, onUpdateProgress, onDelete }) => {
   return (
     <div>
       {habits.map((habit) => (
@@ -11,7 +11,6 @@ const HabitList = ({ habits, onUpdateProgress, onDelete, iconMap }) => {
           habit={habit}
           onUpdateProgress={onUpdateProgress}
           onDelete={onDelete}
-          iconMap={iconMap}
         />
       ))}
     </div>

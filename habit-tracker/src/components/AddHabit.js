@@ -28,7 +28,7 @@ const AddHabit = ({ onAddHabit }) => {
   const [selectedIcon, setSelectedIcon] = useState("FitnessCenter");
   const [habitCount, setHabitCount] = useState("");
   const [habitUnit, setHabitUnit] = useState("count");
-  const [habitColor, setHabitColor] = useState(pastelColors[0].hex); // Default to the first pastel color
+  const [habitColor, setHabitColor] = useState(pastelColors[0].hex);
 
   const handleSubmit = (e) => {
     e.preventDefault();
