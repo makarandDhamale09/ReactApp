@@ -1,9 +1,17 @@
 // src/components/HabitItem.js
 import React from "react";
 import { Button, IconButton } from "@mui/material";
-import { Delete, CheckCircleOutline, Undo } from "@mui/icons-material";
+import {
+  Delete,
+  CheckCircleOutline,
+  Undo,
+  HelpOutline,
+} from "@mui/icons-material"; // Default fallback icon
 
-const HabitItem = ({ habit, onToggleComplete, onDelete }) => {
+const HabitItem = ({ habit, onToggleComplete, onDelete, iconMap }) => {
+  // Use a fallback icon if the selected icon is not available in iconMap
+  const habitIcon = iconMap[habit.icon] || <HelpOutline />; // Fallback to HelpOutline icon if habit.icon is undefined
+
   return (
     <div
       style={{
@@ -16,11 +24,15 @@ const HabitItem = ({ habit, onToggleComplete, onDelete }) => {
         margin: "10px 0",
       }}
     >
-      <span
-        style={{ textDecoration: habit.completed ? "line-through" : "none" }}
-      >
-        {habit.name}
-      </span>
+      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        {/* Show the selected icon or fallback */}
+        {habitIcon}
+        <span
+          style={{ textDecoration: habit.completed ? "line-through" : "none" }}
+        >
+          {habit.name}
+        </span>
+      </div>
       <div>
         <Button
           variant="contained"
