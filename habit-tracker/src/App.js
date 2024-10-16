@@ -20,12 +20,14 @@ const iconMap = {
 const App = () => {
   const [habits, setHabits] = useState([]);
 
-  const addHabit = (name, icon) => {
+  const addHabit = (name, icon, count, unit) => {
     const newHabit = {
       id: Date.now(),
       name,
       completed: false,
-      icon, // Save the icon choice with the habit
+      icon,
+      count, // Store the habit count
+      unit, // Store the habit unit
     };
     setHabits([...habits, newHabit]);
   };

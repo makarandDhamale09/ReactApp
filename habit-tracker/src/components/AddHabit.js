@@ -17,17 +17,19 @@ import {
 
 const AddHabit = ({ onAddHabit }) => {
   const [habitName, setHabitName] = useState("");
-  const [selectedIcon, setSelectedIcon] = useState("FitnessCenter"); // Default icon
+  const [selectedIcon, setSelectedIcon] = useState("FitnessCenter");
+  const [habitCount, setHabitCount] = useState("");
+  const [habitUnit, setHabitUnit] = useState("count"); // Default to "count"
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (habitName) {
-      onAddHabit(habitName, selectedIcon);
+    if (habitName && habitCount) {
+      onAddHabit(habitName, selectedIcon, habitCount, habitUnit);
       setHabitName("");
+      setHabitCount("");
     }
   };
 
-  // List of available icons (can expand this list)
   const iconOptions = [
     { value: "FitnessCenter", label: "Weights", icon: <FitnessCenter /> },
     { value: "DirectionsRun", label: "Running", icon: <DirectionsRun /> },
@@ -39,10 +41,17 @@ const AddHabit = ({ onAddHabit }) => {
     },
   ];
 
+  const unitOptions = ["count", "minutes", "reps"];
+
   return (
     <form
       onSubmit={handleSubmit}
-      style={{ display: "flex", gap: "10px", margin: "20px 0" }}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "10px",
+        margin: "20px 0",
+      }}
     >
       <TextField
         variant="outlined"
@@ -51,7 +60,7 @@ const AddHabit = ({ onAddHabit }) => {
         onChange={(e) => setHabitName(e.target.value)}
         fullWidth
       />
-      <FormControl>
+      <FormControl fullWidth>
         <InputLabel>Icon</InputLabel>
         <Select
           value={selectedIcon}
@@ -61,6 +70,28 @@ const AddHabit = ({ onAddHabit }) => {
           {iconOptions.map((option) => (
             <MenuItem key={option.value} value={option.value}>
               {option.icon} {option.label}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      <TextField
+        variant="outlined"
+        label="Enter Count"
+        value={habitCount}
+        onChange={(e) => setHabitCount(e.target.value)}
+        type="number"
+        fullWidth
+      />
+      <FormControl fullWidth>
+        <InputLabel>Units</InputLabel>
+        <Select
+          value={habitUnit}
+          onChange={(e) => setHabitUnit(e.target.value)}
+          label="Units"
+        >
+          {unitOptions.map((unit) => (
+            <MenuItem key={unit} value={unit}>
+              {unit}
             </MenuItem>
           ))}
         </Select>

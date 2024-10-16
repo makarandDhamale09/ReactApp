@@ -6,11 +6,10 @@ import {
   CheckCircleOutline,
   Undo,
   HelpOutline,
-} from "@mui/icons-material"; // Default fallback icon
+} from "@mui/icons-material";
 
 const HabitItem = ({ habit, onToggleComplete, onDelete, iconMap }) => {
-  // Use a fallback icon if the selected icon is not available in iconMap
-  const habitIcon = iconMap[habit.icon] || <HelpOutline />; // Fallback to HelpOutline icon if habit.icon is undefined
+  const habitIcon = iconMap[habit.icon] || <HelpOutline />;
 
   return (
     <div
@@ -25,12 +24,12 @@ const HabitItem = ({ habit, onToggleComplete, onDelete, iconMap }) => {
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-        {/* Show the selected icon or fallback */}
+        {/* Show the selected icon */}
         {habitIcon}
         <span
           style={{ textDecoration: habit.completed ? "line-through" : "none" }}
         >
-          {habit.name}
+          {habit.name} - {habit.count} {habit.unit}
         </span>
       </div>
       <div>
