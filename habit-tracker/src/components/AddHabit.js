@@ -19,14 +19,16 @@ const AddHabit = ({ onAddHabit }) => {
   const [habitName, setHabitName] = useState("");
   const [selectedIcon, setSelectedIcon] = useState("FitnessCenter");
   const [habitCount, setHabitCount] = useState("");
-  const [habitUnit, setHabitUnit] = useState("count"); // Default to "count"
+  const [habitUnit, setHabitUnit] = useState("count");
+  const [habitColor, setHabitColor] = useState("#0000ff"); // Default to blue
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (habitName && habitCount) {
-      onAddHabit(habitName, selectedIcon, habitCount, habitUnit);
+      onAddHabit(habitName, selectedIcon, habitCount, habitUnit, habitColor);
       setHabitName("");
       setHabitCount("");
+      setHabitColor("#0000ff");
     }
   };
 
@@ -76,7 +78,7 @@ const AddHabit = ({ onAddHabit }) => {
       </FormControl>
       <TextField
         variant="outlined"
-        label="Enter Count"
+        label="Enter Total Count"
         value={habitCount}
         onChange={(e) => setHabitCount(e.target.value)}
         type="number"
@@ -96,6 +98,14 @@ const AddHabit = ({ onAddHabit }) => {
           ))}
         </Select>
       </FormControl>
+      <TextField
+        variant="outlined"
+        label="Select Color"
+        type="color"
+        value={habitColor}
+        onChange={(e) => setHabitColor(e.target.value)}
+        fullWidth
+      />
       <Button variant="contained" color="primary" type="submit">
         Add Habit
       </Button>

@@ -20,22 +20,26 @@ const iconMap = {
 const App = () => {
   const [habits, setHabits] = useState([]);
 
-  const addHabit = (name, icon, count, unit) => {
+  const addHabit = (name, icon, count, unit, color) => {
     const newHabit = {
       id: Date.now(),
       name,
       completed: false,
       icon,
-      count, // Store the habit count
-      unit, // Store the habit unit
+      count,
+      unit,
+      progress: 0, // Track the progress percentage
+      color, // Store the color
     };
     setHabits([...habits, newHabit]);
   };
 
-  const toggleComplete = (id) => {
+  const updateProgress = (id, progress) => {
     setHabits(
       habits.map((habit) =>
-        habit.id === id ? { ...habit, completed: !habit.completed } : habit
+        habit.id === id
+          ? { ...habit, progress: progress > 100 ? 100 : progress }
+          : habit
       )
     );
   };
@@ -52,7 +56,7 @@ const App = () => {
       <AddHabit onAddHabit={addHabit} />
       <HabitList
         habits={habits}
-        onToggleComplete={toggleComplete}
+        onUpdateProgress={updateProgress}
         onDelete={deleteHabit}
         iconMap={iconMap}
       />

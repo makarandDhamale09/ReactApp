@@ -2,14 +2,14 @@
 import React from "react";
 import HabitItem from "./HabitItem";
 
-const HabitList = ({ habits, onToggleComplete, onDelete, iconMap }) => {
+const HabitList = ({ habits, onUpdateProgress, onDelete, iconMap }) => {
   return (
     <div>
       {habits.map((habit) => (
         <HabitItem
           key={habit.id}
           habit={habit}
-          onToggleComplete={onToggleComplete}
+          onUpdateProgress={onUpdateProgress}
           onDelete={onDelete}
           iconMap={iconMap}
         />

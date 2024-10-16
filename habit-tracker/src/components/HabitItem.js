@@ -1,15 +1,18 @@
 // src/components/HabitItem.js
-import React from "react";
-import { Button, IconButton } from "@mui/material";
-import {
-  Delete,
-  CheckCircleOutline,
-  Undo,
-  HelpOutline,
-} from "@mui/icons-material";
+import React, { useState } from "react";
+import { IconButton, TextField } from "@mui/material";
+import { Delete, HelpOutline } from "@mui/icons-material";
 
-const HabitItem = ({ habit, onToggleComplete, onDelete, iconMap }) => {
+const HabitItem = ({ habit, onUpdateProgress, onDelete, iconMap }) => {
+  const [partialCount, setPartialCount] = useState("");
   const habitIcon = iconMap[habit.icon] || <HelpOutline />;
+
+  const handleProgressChange = (e) => {
+    const progress =
+      (parseFloat(e.target.value) / parseFloat(habit.count)) * 100;
+    setPartialCount(e.target.value);
+    onUpdateProgress(habit.id, progress); // Call onUpdateProgress to update habit progress
+  };
 
   return (
     <div
@@ -21,26 +24,29 @@ const HabitItem = ({ habit, onToggleComplete, onDelete, iconMap }) => {
         border: "1px solid #ddd",
         borderRadius: "8px",
         margin: "10px 0",
+        background: `linear-gradient(to right, ${habit.color} ${habit.progress}%, transparent ${habit.progress}%)`,
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-        {/* Show the selected icon */}
         {habitIcon}
         <span
-          style={{ textDecoration: habit.completed ? "line-through" : "none" }}
+          style={{
+            textDecoration: habit.progress === 100 ? "line-through" : "none",
+          }}
         >
-          {habit.name} - {habit.count} {habit.unit}
+          {habit.name} - {habit.progress.toFixed(0)}% complete
         </span>
       </div>
       <div>
-        <Button
-          variant="contained"
-          color={habit.completed ? "secondary" : "primary"}
-          startIcon={habit.completed ? <Undo /> : <CheckCircleOutline />}
-          onClick={() => onToggleComplete(habit.id)}
-        >
-          {habit.completed ? "Undo" : "Complete"}
-        </Button>
+        <TextField
+          variant="outlined"
+          label={`Enter ${habit.unit}`}
+          value={partialCount}
+          onChange={handleProgressChange}
+          type="number"
+          size="small"
+          style={{ width: "100px", marginRight: "10px" }}
+        />
         <IconButton color="error" onClick={() => onDelete(habit.id)}>
           <Delete />
         </IconButton>
