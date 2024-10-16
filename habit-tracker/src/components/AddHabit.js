@@ -15,12 +15,20 @@ import {
   AccessibilityNew,
 } from "@mui/icons-material";
 
+const pastelColors = [
+  { name: "Light Blue", hex: "#ADD8E6" },
+  { name: "Light Coral", hex: "#F08080" },
+  { name: "Light Green", hex: "#90EE90" },
+  { name: "Light Yellow", hex: "#FFFFE0" },
+  { name: "Lavender", hex: "#E6E6FA" },
+];
+
 const AddHabit = ({ onAddHabit }) => {
   const [habitName, setHabitName] = useState("");
   const [selectedIcon, setSelectedIcon] = useState("FitnessCenter");
   const [habitCount, setHabitCount] = useState("");
   const [habitUnit, setHabitUnit] = useState("count");
-  const [habitColor, setHabitColor] = useState("#0000ff"); // Default to blue
+  const [habitColor, setHabitColor] = useState(pastelColors[0].hex); // Default to the first pastel color
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +36,7 @@ const AddHabit = ({ onAddHabit }) => {
       onAddHabit(habitName, selectedIcon, habitCount, habitUnit, habitColor);
       setHabitName("");
       setHabitCount("");
-      setHabitColor("#0000ff");
+      setHabitColor(pastelColors[0].hex); // Reset to the first color
     }
   };
 
@@ -98,14 +106,24 @@ const AddHabit = ({ onAddHabit }) => {
           ))}
         </Select>
       </FormControl>
-      <TextField
-        variant="outlined"
-        label="Select Color"
-        type="color"
-        value={habitColor}
-        onChange={(e) => setHabitColor(e.target.value)}
-        fullWidth
-      />
+      <FormControl fullWidth>
+        <InputLabel>Color</InputLabel>
+        <Select
+          value={habitColor}
+          onChange={(e) => setHabitColor(e.target.value)}
+          label="Color"
+        >
+          {pastelColors.map((color) => (
+            <MenuItem
+              key={color.hex}
+              value={color.hex}
+              style={{ backgroundColor: color.hex }}
+            >
+              {color.name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
       <Button variant="contained" color="primary" type="submit">
         Add Habit
       </Button>
